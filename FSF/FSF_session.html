@@ -438,7 +438,7 @@
 
 <span class="styles_date__1HPlw" id="date_time">Friday     11:00 AM
 </span>
-<span class="styles_date__1HPlw">club: SF SOMA </span><span class="styles_date__1HPlw">01/01/2021</span>
+<span class="styles_date__1HPlw" id="club" onclick="clubchange()">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
 <script>
    document.getElementsByClassName("styles_date__1HPlw")[0].innerText = moment().add(15, 'minutes').format('dddd hh:00 A');
    document.getElementsByClassName("styles_date__1HPlw")[2].innerText = moment().format('MM/DD/YYYY');
@@ -464,6 +464,12 @@
    {
       document.getElementById('qrcode').removeAttribute("style");
    }
+   var clubs = ['club: SF SOMA • Indoor Gym', 'club: SF SOMA • Outdoor Gym', 'club: SF Castro', 'club: SF Transbay'];
+   var	i = 1;
+	function clubchange() {
+		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
+		i = (i + 1) % clubs.length;
+	}
 
 </script>
 </div>
