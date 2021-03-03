@@ -469,6 +469,10 @@
 		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
 		i = (i + 1) % clubs.length;
 	}
+	if (urlParams.has('cid') == true) {
+		i = urlParams.get('cid')
+		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
+	}
 
 </script>
 </div>
