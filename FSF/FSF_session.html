@@ -432,13 +432,13 @@
                      <span class="styles_text__2iYFb">Scan the QR Code at the front desk to check-in</span>
 <!--                         <canvas height="384" width="384" class="styles_code__B2K-m" style="height: 128px; width: 128px;"></canvas>
 -->                        
-<div id="qrcode" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;"><img id="qrimg" height="384" width="384" src="img/qr.png" alt="Code" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;">
+<div id="qrcode" onclick="clubchange()" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;"><img id="qrimg" height="384" width="384" src="img/qr.png" alt="Code" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;">
 </div>
 <span class="styles_uniq__3IvrT">7fa69930-4c63-11eb-aa58-8f15d558ace8</span><span class="styles_fullName__Ei9ER">Sebastian Grubb</span>
 
 <span class="styles_date__1HPlw" id="date_time">Friday     11:00 AM
 </span>
-<span class="styles_date__1HPlw" id="club" onclick="clubchange()">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
+<span class="styles_date__1HPlw" id="club">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
 <script>
    document.getElementsByClassName("styles_date__1HPlw")[0].innerText = moment().add(15, 'minutes').format('dddd hh:00 A');
    document.getElementsByClassName("styles_date__1HPlw")[2].innerText = moment().format('MM/DD/YYYY');
@@ -463,7 +463,7 @@
    {
       document.getElementById('qrcode').removeAttribute("style");
    }
-   var clubs = ['club: SF SOMA • Indoor Gym', 'club: SF SOMA • Outdoor Gym', 'club: SF Castro', 'club: SF Transbay'];
+   var clubs = ['club: SF SOMA • Indoor Gym', 'club: SF SOMA • Outdoor Gym', 'club: SF Castro', 'club: SF Transbay', 'club: SF Mid Market'];
    var	i = 1;
 	function clubchange() {
 		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
