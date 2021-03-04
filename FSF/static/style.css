@@ -1,3 +1,7 @@
+body{
+    touch-action: manipulation;
+}
+
 .styles_input__29fFi {
 	box-sizing: border-box;
 	border: none;
