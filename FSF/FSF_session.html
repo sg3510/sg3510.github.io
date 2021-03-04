@@ -427,7 +427,7 @@
       <div class="styles_templateWrapper__1g_Im">
          <div class="styles_mainWrapper__oL_77">
             <div class="styles_modalContainer__36y4i false" id="qr-modal" style="height: 100%;">
-               <div class="styles_closeIcon__jDesk"><img src="https://member.fitnesssf.com/static/media/close.f2af80f6.svg" alt="close"></div>
+               <div class="styles_closeIcon__jDesk" onclick="timeupdate()"><img src="https://member.fitnesssf.com/static/media/close.f2af80f6.svg" alt="close"></div>
                <div class="styles_modalWrapper__3JrLy">
                   <span class="styles_title__3SQ7n">Time to hit the gym!</span>
                   <div class="styles_modalWrapper__3JrLy false">
@@ -442,10 +442,13 @@
 </span>
 <span class="styles_date__1HPlw" id="club">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
 <script>
-   document.getElementsByClassName("styles_date__1HPlw")[0].innerText = moment().add(15, 'minutes').format('dddd hh:00 A');
-   document.getElementsByClassName("styles_date__1HPlw")[2].innerText = moment().format('MM/DD/YYYY');
-   const queryString = window.location.search;
-   const urlParams = new URLSearchParams(queryString);
+	function timeupdate(){
+		document.getElementsByClassName("styles_date__1HPlw")[0].innerText = moment().add(15, 'minutes').format('dddd hh:00 A');
+		document.getElementsByClassName("styles_date__1HPlw")[2].innerText = moment().format('MM/DD/YYYY');
+	}
+	timeupdate();
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
 
    if ((urlParams.has('name') == true) && (urlParams.has('id') == true)) {
       document.getElementsByClassName("styles_fullName__Ei9ER")[0].innerText = urlParams.get('name')
@@ -466,10 +469,10 @@
       document.getElementById('qrcode').removeAttribute("style");
    }
    var clubs = ['club: SF SOMA • Indoor Gym', 'club: SF SOMA • Outdoor Gym', 'club: SF Castro', 'club: SF Transbay', 'club: SF Mid Market'];
-   var	i = 1;
+   var	i = 0;
 	function clubchange() {
-		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
 		i = (i + 1) % clubs.length;
+		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
 	}
 	if (urlParams.has('cid') == true) {
 		i = urlParams.get('cid')
