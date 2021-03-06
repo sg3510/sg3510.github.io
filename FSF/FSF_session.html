@@ -434,7 +434,8 @@
                      <span class="styles_text__2iYFb">Scan the QR Code at the front desk to check-in</span>
 <!--                         <canvas height="384" width="384" class="styles_code__B2K-m" style="height: 128px; width: 128px;"></canvas>
 -->                        
-<div id="qrcode" onclick="clubchange()" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;"><img id="qrimg" height="384" width="384" src="img/qr.png" alt="Code" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;">
+<div id="qrcode" onclick="clubchange()" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;">
+	<img id="qrimg" height="384" width="384" src="img/qr.png" alt="Code" style="height: 128px; width: 128px; margin: 20px 0px 20px 0px;">
 </div>
 <span class="styles_uniq__3IvrT">7fa69930-4c63-11eb-aa58-8f15d558ace8</span><span class="styles_fullName__Ei9ER">Sebastian Grubb</span>
 
@@ -442,6 +443,27 @@
 </span>
 <span class="styles_date__1HPlw" id="club">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
 <script>
+	var qrlevel = 1;
+	var id = null;
+	var qrcode = null;
+
+   function qrchange() {
+   	qrlevel = (qrlevel + 1) % 4;
+   	//if document.getElementById("qrimg") document.getElementById("qrimg").remove();
+   	document.getElementById("qrcode").innerHTML = "";
+      qrcode = new QRCode(document.getElementById("qrcode"), {
+         text: id,
+       width: 128,
+       height: 128,
+       colorDark : "#000000",
+       colorLight : "#ffffff",
+       correctLevel : qrlevel//QRCode.CorrectLevel.L
+    });
+	//qrcode.makeCode({text: id, correctLevel : qrlevel});
+	console.log(qrlevel);
+   };
+
+
 	function timeupdate(){
 		document.getElementsByClassName("styles_date__1HPlw")[0].innerText = moment().add(15, 'minutes').format('dddd hh:00 A');
 		document.getElementsByClassName("styles_date__1HPlw")[2].innerText = moment().format('MM/DD/YYYY');
@@ -451,28 +473,33 @@
 	const urlParams = new URLSearchParams(queryString);
 
    if ((urlParams.has('name') == true) && (urlParams.has('id') == true)) {
-      document.getElementsByClassName("styles_fullName__Ei9ER")[0].innerText = urlParams.get('name')
-   
-      document.getElementById("qrimg").remove();
-      
+   		id = urlParams.get('id');
+		document.getElementsByClassName("styles_fullName__Ei9ER")[0].innerText = urlParams.get('name')
 
-      new QRCode(document.getElementById("qrcode"), {
-         text: urlParams.get('id'),
+		//QR here
+		document.getElementById("qrimg").remove();
+      qrcode = new QRCode(document.getElementById("qrcode"), {
+         text: id,
        width: 128,
        height: 128,
        colorDark : "#000000",
        colorLight : "#ffffff",
-       correctLevel : QRCode.CorrectLevel.L
+       correctLevel : qrlevel//QRCode.CorrectLevel.L
     });
+
    } else
    {
       document.getElementById('qrcode').removeAttribute("style");
    }
+
+
+   
    var clubs = ['club: SF SOMA • Indoor Gym', 'club: SF SOMA • Outdoor Gym', 'club: SF Castro', 'club: SF Transbay', 'club: SF Mid Market'];
    var	i = 0;
 	function clubchange() {
 		i = (i + 1) % clubs.length;
 		document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
+		qrchange();
 	}
 	if (urlParams.has('cid') == true) {
 		i = urlParams.get('cid')
