@@ -440,6 +440,17 @@
                         <span class="styles_date__1HPlw" id="date_time">Friday     11:00 AM
                         </span>
                         <span class="styles_date__1HPlw" id="club">club: SF SOMA • Indoor Gym</span><span class="styles_date__1HPlw">01/01/2021</span>
+                     </div>
+                  </div>
+                  <img class="styles_logo__1Iatq" src="static/media/img_logo_fszuv8.png" alt="logo">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div style="position: fixed; bottom: 0;width: 100%;" id='menu'>
+         <img src="img/menu.png" style="width: 100%">
+      </div>
+   </body>
                         <script>
                            var qrlevel = 1;
                            var id = null;
@@ -504,17 +515,14 @@
                               i = urlParams.get('cid')
                               document.getElementsByClassName("styles_date__1HPlw")[1].innerText = clubs[i]
                            }
+                           if (urlParams.has('nomenu') == true) {
+                              if (urlParams.get('nomenu') == 1)
+                              {
+                                 document.getElementById("menu").innerHTML = "";
+
+                              }
+                              
+                           }
                            
                         </script>
-                     </div>
-                  </div>
-                  <img class="styles_logo__1Iatq" src="static/media/img_logo_fszuv8.png" alt="logo">
-               </div>
-            </div>
-         </div>
-      </div>
-      <div style="position: fixed; bottom: 0;width: 100%;">
-         <img src="img/menu.png" style="width: 100%">
-      </div>
-   </body>
 </html>
