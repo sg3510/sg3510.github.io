@@ -1,3 +1,7 @@
+body{
+    touch-action: manipulation;
+}
+
 .styles_input__29fFi {
 	box-sizing: border-box;
 	border: none;
@@ -9251,10 +9255,11 @@ th {
 }
 
 .styles_logo__1Iatq {
-	position: absolute;
-	height: 40%;
+	position: fixed;
+	height: 37.5%;
 	right: 0;
-	bottom: 0
+	bottom: 0;
+	margin-bottom: 20%
 }
 
 .styles_addToWallet__3eDyl {
