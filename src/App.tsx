@@ -103,17 +103,39 @@ const App: React.FC = () => {
           <nav>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/interests">Interests</NavLink>
+            <NavLink to="/fun-things">Fun Things</NavLink>
           </nav>
         </header>
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/interests" element={<Interests />} />
+            <Route path="/fun-things" element={<FunThings />} />
           </Routes>
         </main>
       </div>
     </Router>
   );
 };
+
+function FunThings() {
+  return (
+    <div className="text-content">
+      <h2>Fun Things</h2>
+      <ul>
+        <li>
+          <a
+            href="https://sebgrubb.com/pokemon-tileset/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pokemon Tileset Viewer
+          </a>
+          : A fun project I made to read and display tilesets and blocksets from Pokemon Yellow in a browser.  In Pokemon, each map is made of a grid of 16x16 pixel squares. Each square is composed of four 8x8 pixel tiles. This was done since Pokemon Yellow had to fit in *just* 503 KB of ROM so devs had to get very creative with how they stored the graphics data.
+        </li>
+      </ul>
+    </div>
+  );
+}
 
 export default App;
