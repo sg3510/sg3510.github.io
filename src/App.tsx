@@ -66,7 +66,7 @@ const Home: React.FC = () => {
           />
         </div>
         <h1>Hi I'm Seb</h1>
-        <p>I'm currently exploring different startup ideas.</p>
+        <p>I'm currently exploring different startup ideas. My main interests are  solving hard problems with technical products but more specifically in the areas of AI, health and consumer products.</p>
 
         <p>I enjoy both writing software but also making it scale to millions (or billions) of users - this has led me to jump between the roles of software engineer and a PM at various companies including:</p>
         <ul>
