@@ -10,6 +10,8 @@ import { TypeAnimation } from "react-type-animation";
 import { SocialIcon } from "react-social-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { ThemeToggle } from "./components/ThemeToggle";
 import "./App.css";
 
 const imageList = [
@@ -154,39 +156,44 @@ const App: React.FC = () => {
   const [typingDone, setTypingDone] = useState(false);
 
   return (
-    <Router>
-      <div className="App">
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        <header className="App-header">
-          <div className="header-container">
-            <h1 className="name">
-              <TypeAnimation
-                sequence={["Seb Grubb", () => setTypingDone(true)]}
-                wrapper="span"
-                cursor={false}
-                speed={50}
-                className={typingDone ? "typing-done" : ""}
-                style={{ display: "inline-block" }}
-              />
-            </h1>
-            <nav>
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/interests">Interests</NavLink>
-              <NavLink to="/fun-things">Fun Things</NavLink>
-            </nav>
-          </div>
-        </header>
-        <main id="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/interests" element={<Interests />} />
-            <Route path="/fun-things" element={<FunThings />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          <header className="App-header">
+            <div className="header-container">
+              <h1 className="name">
+                <TypeAnimation
+                  sequence={["Seb Grubb", () => setTypingDone(true)]}
+                  wrapper="span"
+                  cursor={false}
+                  speed={50}
+                  className={typingDone ? "typing-done" : ""}
+                  style={{ display: "inline-block" }}
+                />
+              </h1>
+              <div className="nav-container">
+                <nav>
+                  <NavLink to="/">Home</NavLink>
+                  <NavLink to="/interests">Interests</NavLink>
+                  <NavLink to="/fun-things">Fun Things</NavLink>
+                </nav>
+                <ThemeToggle />
+              </div>
+            </div>
+          </header>
+          <main id="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/interests" element={<Interests />} />
+              <Route path="/fun-things" element={<FunThings />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 
