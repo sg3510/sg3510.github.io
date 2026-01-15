@@ -16,9 +16,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   color: var(--text-primary);
-  background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-end));
+  background: var(--bg-primary);
   min-height: 100vh;
-  background-attachment: fixed;
   position: relative;
 }
 

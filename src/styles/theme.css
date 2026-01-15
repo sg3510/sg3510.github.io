@@ -4,11 +4,7 @@
   --bg-primary: #f8f9fa;
   --bg-secondary: #ffffff;
   --bg-tertiary: #e9ecef;
-  
-  /* Gradient colors for light theme */
-  --gradient-end: #7d8597;
-  --gradient-start: #ffffff;
-  
+
   /* Grain effect */
   --grain-opacity: 0.4;
   
@@ -49,11 +45,7 @@
   --bg-primary: #0d1117;
   --bg-secondary: #161b22;
   --bg-tertiary: #21262d;
-  
-  /* Gradient colors for dark theme */
-  --gradient-end: #001233;
-  --gradient-start: #606d89;
-  
+
   /* Lighter grain for dark mode */
   --grain-opacity: 0.35;
   
