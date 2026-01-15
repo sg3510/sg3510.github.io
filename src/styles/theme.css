@@ -5,6 +5,13 @@
   --bg-secondary: #ffffff;
   --bg-tertiary: #e9ecef;
   
+  /* Gradient colors for light theme */
+  --gradient-end: #7d8597;
+  --gradient-start: #ffffff;
+  
+  /* Grain effect */
+  --grain-opacity: 0.4;
+  
   --text-primary: #333333;
   --text-secondary: #6c757d;
   --text-on-primary: #ffffff;
@@ -43,12 +50,19 @@
   --bg-secondary: #161b22;
   --bg-tertiary: #21262d;
   
+  /* Gradient colors for dark theme */
+  --gradient-end: #001233;
+  --gradient-start: #606d89;
+  
+  /* Lighter grain for dark mode */
+  --grain-opacity: 0.35;
+  
   --text-primary: #c9d1d9;
   --text-secondary: #8b949e;
   --text-on-primary: #ffffff;
   
   /* Adjusted blue accents for dark mode */
-  --accent-primary: #58a6ff; /* Brighter blue for dark mode */
+  --accent-primary: #2f64a0; /* Brighter blue for dark mode */
   --accent-hover: #79b8ff;
   --accent-active: #a5d6ff;
   
@@ -59,7 +73,7 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   
   /* Header specific - using darker blues */
-  --header-bg: var(--blue-darker);
+  --header-bg: #001233;
   --header-text: var(--text-on-primary);
 }
 
