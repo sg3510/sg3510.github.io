@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const interests = await getEntry('pages', 'interests');
+const { Content } = await render(interests);
+---
+
+<BaseLayout title="Interests" description="Things I'm passionate about">
+  <div class="content-container">
+    <div class="text-content">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Ensure external links open in new tab behavior */
+  :global(.text-content a[href^="http"]) {
+    target: _blank;
+  }
+</style>

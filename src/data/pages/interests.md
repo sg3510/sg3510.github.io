@@ -1,3 +1,8 @@
+---
+title: Interests
+description: Things I'm passionate about
+---
+
 # Interests
 
 I usually try to stay open-minded and curious about various things, but areas that I'm particularly interested in are:

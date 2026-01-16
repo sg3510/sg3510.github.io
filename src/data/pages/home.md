@@ -1,3 +1,8 @@
+---
+title: Home
+description: Seb Grubb's personal site
+---
+
 # Hi I'm Seb
 
 I'm currently exploring different startup ideas. My main interests are solving hard problems with technical products but more specifically in the areas of AI, health and consumer products.

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProfileImage from '../components/ProfileImage.tsx';
+import SocialIcons from '../components/SocialIcons.astro';
+import { getEntry, render } from 'astro:content';
+
+const home = await getEntry('pages', 'home');
+const { Content } = await render(home);
+---
+
+<BaseLayout title="Home" description="Seb Grubb's personal site">
+  <div class="content-container">
+    <div class="text-content">
+      <ProfileImage client:load />
+      <Content />
+      <SocialIcons />
+    </div>
+  </div>
+</BaseLayout>

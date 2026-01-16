@@ -1,0 +1,55 @@
+---
+import ThemeToggle from '../components/ThemeToggle.tsx';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Seb Grubb's personal site" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Source+Code+Pro&display=swap" rel="stylesheet" />
+    <title>{title} | Seb Grubb</title>
+    <!-- Prevent flash of wrong theme -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="App-header">
+      <div class="header-container">
+        <h1 class="name">
+          <a href="/" style="color: inherit; text-decoration: none;">Seb Grubb</a>
+        </h1>
+        <div class="nav-container">
+          <nav>
+            <a href="/" class:list={['nav-link', { active: currentPath === '/' }]}>Home</a>
+            <a href="/interests" class:list={['nav-link', { active: currentPath === '/interests' || currentPath === '/interests/' }]}>Interests</a>
+            <a href="/fun-things" class:list={['nav-link', { active: currentPath === '/fun-things' || currentPath === '/fun-things/' }]}>Fun Things</a>
+          </nav>
+          <ThemeToggle client:load />
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>

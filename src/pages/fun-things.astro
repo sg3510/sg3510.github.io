@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const funThings = await getEntry('pages', 'fun-things');
+const { Content } = await render(funThings);
+---
+
+<BaseLayout title="Fun Things" description="Side projects and experiments">
+  <div class="content-container">
+    <div class="text-content">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>
