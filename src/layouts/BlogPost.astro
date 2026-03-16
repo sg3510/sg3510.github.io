@@ -15,6 +15,7 @@ const formatDate = (date: Date) => {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC',
   });
 };
 ---
@@ -126,6 +127,20 @@ const formatDate = (date: Date) => {
     background: var(--bg-tertiary);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
+  }
+
+  .post-content :global(section[data-footnotes]) {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+  }
+
+  .post-content :global(section[data-footnotes])::before {
+    content: "Footnotes";
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
   }
 
   .post-content :global(blockquote) {
