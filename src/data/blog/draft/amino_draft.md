@@ -1,3 +1,9 @@
+---
+title: "Amino Draft Notes"
+date: 2026-03-16
+draft: true
+---
+
 ### RAG is not dead
 
 I keep on seeing people declare that RAG is dead but, especially in our use case, it's actually very useful to ground your responses but I think how RAG is being done is changing - we're coming to terms that chunking is inefficient and loses critical meaning but we know that, for codebases for eg, there are better ways to build context, such as a simple `grep` or travering the [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
