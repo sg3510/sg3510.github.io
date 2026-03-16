@@ -32,7 +32,10 @@ const formatDate = (date: Date) => {
           {posts.map((post) => (
             <li class="post-item">
               <a href={`/blog/${post.id}`} class="post-link">
-                <span class="post-title">{post.data.title}</span>
+                <span class="post-title">
+                  {post.data.draft && <span class="draft-badge">DRAFT</span>}
+                  {post.data.title}
+                </span>
                 <span class="post-date">{formatDate(post.data.date)}</span>
               </a>
               {post.data.description && (
@@ -95,6 +98,17 @@ const formatDate = (date: Date) => {
     margin: 0.5rem 0 0 0;
     color: var(--text-secondary);
     font-size: 0.95rem;
+  }
+
+  .draft-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #e2a000;
+    color: #fff;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
   }
 
   .no-posts {
