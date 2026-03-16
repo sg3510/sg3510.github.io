@@ -1,0 +1,138 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+  tags?: string[];
+}
+
+const { title, date, description, tags } = Astro.props;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="content-container">
+    <article class="text-content blog-post">
+      <header class="post-header">
+        <a href="/blog" class="back-link">&larr; Back to blog</a>
+        <h1>{title}</h1>
+        <div class="post-meta">
+          <time datetime={date.toISOString()}>{formatDate(date)}</time>
+          {tags && tags.length > 0 && (
+            <div class="tags">
+              {tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </header>
+      <div class="post-content">
+        <slot />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    max-width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .post-header h1 {
+    margin-bottom: 0.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .post-meta time {
+    font-family: 'Source Code Pro', monospace;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+
+  .post-content {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .post-content :global(p),
+  .post-content :global(li) {
+    font-size: 1rem;
+  }
+
+  .post-content :global(h2) {
+    margin-top: 2rem;
+  }
+
+  .post-content :global(pre) {
+    background: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+
+  .post-content :global(code) {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9em;
+  }
+
+  .post-content :global(p code) {
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--accent-primary);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+</style>
