@@ -3,6 +3,7 @@ title: "How to be an effective PM with LLMs"
 date: 2025-02-01
 description: "How AI is changing the PM role and making technical skills more valuable"
 tags: ["ai", "product-management"]
+draft: true
 ---
 
 # How to be an effective PM with LLMs

@@ -23,67 +23,53 @@ That's how we came to build [Amino](https://amino.fit) - the goal was to build o
 
 <small>Early Amino mock that incorporated some our learnings like the edit feature</small>
 
-
 Here's some of the lessons I learnt along the way:
 
-### Help users prompt better & treat everything like a draft
+### Help users prompt
 
-By making a previous, structured flow, into a single open ended text entry we ended up finding that many users would also simplify what they would log  things like "a burger and a soda" which was too low information. The gold standard would be "3oz bun with 6oz patty, 30 gram amercain cheese and 12fl oz can" but requiring that for all entries from users was hard - so instead we spent some time education users in the input flow to be as descriptive as possible to nudge them to do so and improve the output. We also were able to detect clearly low quality entries with a simple LLM prompt and would sometimes suggest that the users improve the prompt and expain what's missing - that's how the edit message feature came to life. Once we implemented the feature that help users learn their entry wasn't detailed enough we saw the amount of these too simlistic food entries go down!
+We found that giving users an open-ended text field instead of a traditional UI flow meant they didn't know what level of detail was required to get accurate output. Many would enter something like "chicken broccoli with rice" which would be really challenging to give them accurate calories[^3]. We solved this in two ways
+- _Educated users how to accurate log_: both at first app open and during the food logging flow we had text reminding them to add info like estimate weight 
+- _Detect low detail entries_: This was extremely high-impact - we would simply run each entry via a simple LLM prompt to detect if the food entry was detailed enough to return good quality info. If it wasn't we would encourage the user via the UI to edit the message to improve food matching accuracy.
 
-Once image models got better we added image support and same problem - users would sometimes upload pictures of say a salad and it was really hard to tell if there's something like oil in there that heavily impacted calories. We spent a while detecting through another piepleine which images are 'low info' or not to nudge users to enter text alongside the image.
+The best AI products shouldn't require your users to be prompt engineers.
 
-Teaching users to prompt well will be even more importantly as we see the next wave of 'agentic' llm apps where users are influencing a whole workflow.
+### Discovery is critical in AI apps
 
-### Discovery is critical AI 
+We noticed that a fair amount of users would log some of their meals a lot later in the day - i.e. they'd log their breakfast around noon then edit the entry time to be around 8am. Some even had entries like "for breakfast i had 3oz dry oats with a cup of skim milk and 50g strawberries". The fix was obvious - add a parallel step in our pipeline to detect time[^4].
 
-When you have a single text entry box, users can often get stuck and not know what to enter. For example we added a feature that allowed users to say "i had oats for bfast this morning" and have food logged at breakfast but the text box entry made it hidden so we added examples in the full screen food logging entry.
+However after fixing this the biggest issue was discoverability - users just saw an open ended text box. We could try to educate them in the UI just like we did above but there was a high risk of education fatigue. While we still highlighted this feature during onboarding we also did targeted education:
+- for users who had previously tried to log food with time information ('for dinner', 'yesterday' etc) we identified them at scale and let them know on next app open it was now launched
+- after users edited the time of an entry we let them know they could simply specify them time in the food logging phrase
 
-
-### Old habits never die
-Once image models got better we added image upload support and something interesting haoppened - people started uploading pics of barcodes that completely broke our system! They had been tuahgt by previous apps to upload barcodes. It was luckily an easy fix but proof again that even users willing to try new products keep their old habits!
-
-### RAG is not dead
-I see everyone declare that RAG is dead but for us being able to ground results in a database and ensure users had accruate calorie & macro data couldn't have been done with RAG and it would be hard to ensure that current models have all the possilbe food database info in their training set (including new SKUs). RAG may however be changing - I've no
-
-### Focus on real growth: charge your users
-Our initial product was free and had great retention but we, like many other startups, were too scared to charge - what if it drives all our users away?
-
- started getting even more valuable feedback when we tried to start charging - that's actually how we added Apple Healthkit syncing support because when people declined to pay we asked for feedback and healthkit syncing was a decision factor. Amny startups pursue growth without trying to see if their users are willing to pay and once they try they have burnt a lot of cash to find out something they could have done earlier.
-
-
+LLM interfaces tend to make products look simpler, think of ChatGPT, but as a result hide many of great features. ChatGPT is a great example since many people I talk to don't realise it is able to make graphs of data you give it.
 
 ### Find smart ways to get feedback fast
 
-Since the space is moving so fast it was crucial that we could quickly get user feedback, either implicitly or explicity. For us we would pay close attention to the rates of food prompts that were edited or deleted as it was a good signal that we hadn't succesffully identified the correct foods the first time
+Features are being built faster than ever - the ways you get feedback should be just as fast.
 
+Getting users to give quality feedback is actually pretty hard, especially at a startup scale. However feedback is critical as you grow to understand where your product is failing - metrics like churn are pretty much a lagging indicator so you need to focus on leading indicators.
 
-- *Consumer is really fun* if you're making something your users enjoy - people would reach out and be genuinely 
-- The bar for MVP in consumer is getting even higher: we initially built a demo in react but that was clearly not going to work. But we had the backend working so we didn't even attempt to launch and instead focused on making
-- many startups choose to launch multiple times (eg airbnb) and we did that too. We launched the web app just to see what people thought and it got us some initial feedback. for startups everyone is scared of launching a bad product and hurting their reputation but actually it gets you that feedback faster and the users you've disappointed may not come back stragith away but new users will always come and once you get your product right they will evangelise it. This was the case for me with Bard - I tested it and it was pretty bad. But once Gemini 2.5 came out I was like wow Google got their game back. Same happened to Anthropic when they didnt have the best models but then found their biggest growth with Claude Code.
+For us we had a natural feedback loop we used to understand how much users were enjoying our app - food delete rate and edit rate. These were great indicators of whether users didn't trust our output or thought they needed a more detailed prompt. These proved invaluable in improving our matching pipeline accuracy.
 
-- for consumer apps that compete with an non-AI equivalent speed is everything whcih is why we hyper-optimised the time to clicking submit for food to display in the app.
-- Quality vs Ease of use: often a compromise startups need to choose where to draw the line - for use we had competiotrs that did no grounding and focused ruthelssly on growth (eg CalAI sold to MFP but didn't have any grounding - likely why it is being kept as a separate app because there is a market for easy logging but only directional value)
-- Growth cannot be taught: we tried multiple routes but the one that really worked was partnering with small influencers. Ads worked well and i understood why evryone puts AI in their ads - 'fastest' food logger performed worse than AI food logger
-- context is everything & rag is not dead its just changed: eg when logging food - coding agents actually do rag a ton they just mostly use grep or abstract syntax tree traversal
-- chain prompting was great to make a less determinitics workflow more deterministic
-- a lot of pressure for startups to be profitable and we tested paywall to understand
-- pay some attention to competitors but not too much - for startups you will rarely be cometing with the same user and your job is to build a product that solves a user problem successfully (pmf)
-- conusmer is harder than ever but success is very much there
+If you're building a product think about what metrics you can use as leading quality indicators - thumbs/up down is the default one for LLM interfaces but it's even better if you can find some metric with more coverage (eg for instagram dwell time is a good metric to understand the success of their recommendation algorithm).
 
+### Focus on real growth: charge your users
+Our initial product was free and had great retention but we, like many other startups, were too scared to charge - what if it drives all our users away? But as a startup, your goal is to build something valuable and charging early is a great way to understand if your product is useful.
 
-What I would change if I rebuilt today
-### Deliver even better UX
+For us, starting to charge was a great way to understand what features to prioritize. We setup a paywall with [RevenueCat](https://www.revenuecat.com/) and gave users a free trial and see what they would say when we tried to charge - if they declined we would ask for feedback. This was tremendously useful since a fair amount of users who declined to pay stated that lack of Apple Health support was a large factor. This was one of the many features in our backlog and gave us good signal to prioritize it.
 
-We offered single click logging but matching would still take a few seconds. Being able to
+You probably shouldn't try to charge straight away but once you have signals that you have some pmf like good retention or engagement it's worth stepping back and consider charging users[^5].
 
-- we now have the inference speed - cerebras at similar cost and so I would use that to differentiate. Cerebras really is magic
-- if we had more runway I would have tried to push out paywall out - thoguh it did teach me a lot on how to setup a paywall strategy
-- make a more agentic flow - while a trendy word this actually makes sense: now that we have fast inference AND models that are finally good a correct tool use making the pipeline be able to choose what tool to call if needed eg "i had 2 eggs" or understand if its a barcode and call those tools - back then the llm thought it could read barcodes but clearly couldnt and would hallucinate them (they do to this day) 
+### Users do like AI!
+When we were figuring out how to grow one of the things we tried were Google and Meta ads. I tried multiple ads copy, some whcih said "the easiest/simplest/fastest food logging app" and another set that just said "AI food logging app". I expected the former to be succesfful since we were upfront about the value provided but to my surprise the ads that said "AI food logging app" actually had a much higher click-through-rate! I expected consumers to be tired of ads that say AI everywhere but it seems that isn't the case - we're still early.
 
-The success story here is CalAI that focused just on growth and exited to MFP - thouhg unsure about sustainability if they dont fix logging quality.
+_____________
+LLMs are moving so fast that you could call Amino a v1 LLM app[^6] - we used vector search and chained prompting for deterministic LLM workflows but now that models are not only a lot better at writing code but also at tool calling we're moving into a v2 era with all the buzzwords like agentic workflows. I'm 
 
-Draft:
-We tried a few things, including a code-documentation agent, [Otterdoc](https://codescribe.co) which seemed promising since devs do hate writing documentation but the models at the time were only so good (and quickly blew past able to write code!)
 
 [^1]: There's plenty of good pivot advice - I suggest starting with Lenny's newsletter [The art of the pivot - Lenny's Newsletter](https://www.lennysnewsletter.com/p/the-art-of-the-pivot-part-2-how-why).
-[^2]: The reason we doubled down on accuracy was because we wanted to target a fitness & health conscious crowd that cared not only about the calories but also the macros that may not be relevant for other use cases. The food logging industry has a surprisingly diversity of apps and there's multiple niches from focusing on weight loss to blood sugar to fitness.
+[^2]: We doubled down on accuracy because we were targeting a fitness- and health-conscious audience that cared not just about calories, but also about macros. That mattered especially for our use case, even though the food-logging market itself is diverse, with distinct niches spanning weight loss, blood sugar/diabetes management, and fitness.
+[^3]: In this case our system was still as smart as it could - for "chicken broccoli and rice" we would assume what was most likely such one chicken breast, a cup of *cooked* rice (1 cup of dry rice has vastly more calories!) and a cup of broccoli which meant we did fine with most low detail entries.
+[^4]: When I started building the time extraction feature I expected it to be really easy but since, to be fast, we were using models like the mini or flash series they would often fail to correctly extract intended time. It took some creative tool-use engineering (by using `date-fns`) to finally get the accuracy from our test set nearly perfect.
+[^5]: Charging users doesn't necessarily mean doing it upfront - we experimented with both freemium and free trials. You should choose what's best for you. Also if your product plans to monetize in other ways (like ads) or your company is competing with other companies flush with cash then charging may not be the right move.
+[^6]: Our initial attempt for food detection pipeline involved a more open ended pipeline that could decide where and how to retrieve info (eg split the food up into sub-components, pull previous food logs and search the database) but, like others at the time, realised that tool calling capabilities just weren't that good.

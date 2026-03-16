@@ -3,6 +3,7 @@ title: "Trying to be lazy with coding agents: Building a Typescript port of Poke
 date: 2025-06-01
 description: "Testing the limits of coding agents by porting GBA Pokemon C code to TypeScript"
 tags: ["ai", "coding-agents", "gamedev"]
+draft: true
 ---
 
 # Trying to be lazy with coding agents: Building a Typescript port of Pokemon
